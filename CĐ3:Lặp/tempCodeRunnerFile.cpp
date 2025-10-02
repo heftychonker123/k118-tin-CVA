@@ -6,13 +6,13 @@ int main(){
     long long n; cin >> n;
     long a=sqrt(n);
     long long ans=1;
-    for (int i=2; i<a+2; i++){
+    for (int i=1; i<a+1; i++){
         if (n%i==0){
-            ans+=i;
+            ans*=i;
             if (n/i!=i){
-                ans+=n/i;
+                ans*=n/i;
             }
         }
     }
-    cout << (ans<n);
+    cout << (ans);
 }
