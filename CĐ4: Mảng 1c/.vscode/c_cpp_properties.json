@@ -7,7 +7,7 @@
             ],
             "defines": [],
             "cStandard": "c17",
-            "compilerPath": "/usr/bin/gcc-13"
+            "compilerPath": "/usr/bin/g++"
         }
     ],
     "version": 4

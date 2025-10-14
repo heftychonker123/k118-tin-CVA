@@ -10,5 +10,5 @@ int main(){
         if (v%2==0) c+=1;
         else l+=1;
     }
-    cout << c << " " << l;
+    cout << c << " ";
 }
