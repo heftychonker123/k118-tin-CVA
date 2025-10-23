@@ -2,28 +2,34 @@
 using namespace std;
 #define pb push_back 
 
-int main(){
-    freopen("LANHDAO.inp" , "r" , stdin);
-    freopen("LANHDAO.out" , "w" , stdout);
+int main() {
     int t; cin >> t;
-    for (int i=0; i<t; i++){
+    for (int i = 0; i < t; i++) {
         int n; cin >> n;
-        vector<long> v={};
-        vector<long> ans={};
-        for (int j=0; j<n ; j++){
-            long t; cin >> t;
-            v.pb(t);
+        if (n == 0) {
+            cout << endl;
+            continue;
         }
-        for (int j=0; j<n ; j++){
-            bool state=true;
-            for (int l=j+1; l<n; l++){
-                if (v[j]<=v[l]) state=false;
+
+        vector<long long> v(n);
+        for (int j = 0; j < n; j++) {
+            cin >> v[j];
+        }
+
+        long long temp = v[n - 1];
+        vector<long long> ans = {temp};
+
+        for (int i = n - 2; i >= 0; i--) {
+            if (v[i] > temp) {
+                temp = v[i];
+                ans.pb(temp);
             }
-            if (state) ans.pb(v[j]);
         }
-        for (long i:ans){
-            cout << i << " ";
+
+        for (int i = ans.size() - 1; i > 0; i--) {
+            cout << ans[i] << " ";
         }
-        cout << endl;
+        cout << ans[0] << endl;
     }
+    return 0;
 }

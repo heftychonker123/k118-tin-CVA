@@ -10,6 +10,6 @@ int main(){
         freq[t]++;
     }
     for (auto & [num,frequency]:freq){
-        cout << num << ":" << frequency << "\n";
+        cout << num << " " << frequency << "\n";
     }
 }

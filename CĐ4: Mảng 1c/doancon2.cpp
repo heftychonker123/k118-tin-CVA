@@ -15,6 +15,7 @@ int main(){
     for (long long i=1 ; i < n ;i++){
         if (curr!=v[i]) {
             temp ++ ;
+            curr=v[i];
         }
         else{
             ans=max(ans,temp);

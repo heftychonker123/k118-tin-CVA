@@ -7,25 +7,13 @@ using namespace std;
 #define llmax LLONG_MAX
 #define pb push_back
 //class
-
-
-
-
-
-
-
 //function
-auto foo1(){}
-
-
-
-
-
-
-
 //initialization code
 int main(){
-    ios::sync_with_stdio(false); // Tăng tốc độ nhập xuất
-    cin.tie(nullptr);
+    int t; cin >> t;
+    for (int tc=0 ; tc<t ; tc++){
+        //put your main init code here here
+        
+    }
     return 0;
 }

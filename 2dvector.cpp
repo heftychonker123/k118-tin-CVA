@@ -6,26 +6,19 @@ using namespace std;
 #define llmin LLONG_MIN
 #define llmax LLONG_MAX
 #define pb push_back
+#define vect vector
 //class
-
-
-
-
-
-
-
 //function
-auto foo1(){}
-
-
-
-
-
-
-
-//initialization code
 int main(){
     ios::sync_with_stdio(false); // Tăng tốc độ nhập xuất
     cin.tie(nullptr);
+    // bảng ô vuông n x m;
+    int n,m ; cin >> n >> m;
+    vect<vect<ll>> v(n);
+    for (int i=0 ; i<n ; i++){
+        vect<ll> temp(m);
+        for (int i=0 ; i<m ; i++) cin >> temp[i];
+        v[i]=temp;
+    }
     return 0;
 }

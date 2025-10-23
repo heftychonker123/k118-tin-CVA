@@ -2,8 +2,8 @@
 using namespace std;
 
 int main(){
-    freopen("XAYDUNGTHAP.inp" , "r" , stdin);
-    freopen("XAYDUNGTHAP.out" , "w" , stdout);
+    //freopen("XAYDUNGTHAP.inp" , "r" , stdin);
+    //freopen("XAYDUNGTHAP.out" , "w" , stdout);
     vector<int> v={};
     for (int i=0; i<1000; i++){
         v.push_back(0);
