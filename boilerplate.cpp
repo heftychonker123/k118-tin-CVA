@@ -10,11 +10,12 @@ using namespace std;
 #define stri string::iterator
 #define vect vector
 #define sstream stringstream
-void solve(){}
+#define umap unordered_map
+
+void solve(){
+}
 int main(){
-    //freopen("idk.inp" , "r" , stdin);
-    //freopen("idk.out" , "w" , stdout);
-    ios::sync_with_stdio(false); // Tăng tốc độ nhập xuất
-    cin.tie(nullptr);
+    //freopen("kstring.inp" , "r" , stdin);
+    //freopen("kstring.out" , "w" , stdout);
     return 0;
 }
