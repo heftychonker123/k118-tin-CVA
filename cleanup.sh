@@ -2,6 +2,7 @@
 
 # Move files to their designated positions
 for file in build/*:*.cpp; do
+    [ -f "$file" ] && echo "$file"
     [ -e "$file" ] || continue
     prefix="${file%%:*}"
     mkdir -p "$prefix"
