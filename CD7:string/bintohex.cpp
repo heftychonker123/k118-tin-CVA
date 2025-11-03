@@ -26,8 +26,8 @@ void solve(str n) {
 }
 
 int main() {
-    freopen("npms.inp" , "r" , stdin); 
-    freopen("npms.out" , "w" , stdout);
+    //freopen("npms.inp" , "r" , stdin); 
+    //freopen("npms.out" , "w" , stdout);
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     str n; cin >> n;

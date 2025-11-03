@@ -15,12 +15,13 @@ using namespace std;
 void solve(str a, str b) {
     ll temp = 0;
     vect<ll> ans = {};
-    while (temp <= b.size() - a.size()) {
+    while (temp <= b.size()) {
         ll pos = b.find(a, temp);
         if (pos != std::string::npos) {
             ans.pb(pos);
-            temp = pos + 1; // move forward to avoid infinite loop
-        } else break;
+            temp = pos + 1;
+        }
+        else temp++;
     }
     cout << ans.size() << "\n";
     for (const ll &i : ans) cout << i+1 << " ";
@@ -30,11 +31,7 @@ void solve(str a, str b) {
 int main(){
     freopen("demxau.inp" , "r" , stdin);
     freopen("demxau.out" , "w" , stdout);
-    ios::sync_with_stdio(false); // Tăng tốc độ nhập xuất
-    cin.tie(nullptr);
-    str a,b ; 
-    cin >> a; 
-    cin >> b;
+    str a,b ; cin >> a; cin >> b;
     solve(a,b);
     return 0;
 }

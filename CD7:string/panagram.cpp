@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
-#define db long double
+#define ld long double
 #define str string
 #define llmin LLONG_MIN
 #define llmax LLONG_MAX
@@ -9,26 +9,25 @@ using namespace std;
 #define strri string::reverse_iterator
 #define stri string::iterator
 #define vect vector
+#define sstream stringstream
+#define umap unordered_map
 
 void solve(str n){
-    str temp="0";
-    ll ans=0;
+    umap<char,int> freq;
     for (const char &i : n){
-        if (isdigit(i)) temp+=i;
-        else{
-            ll t = stoi(temp);
-            ans+=t;
-            temp="0";
-        }
+        char t=tolower(i);
+        freq[t]++;
     }
-    ans+=stoi(temp);
-    cout << ans;
+    if (freq.size()==26){
+        cout << "YES";
+    }
+    else cout << "NO";
     return;
 }
 int main(){
-    freopen("TINHTONG.INP" , "r" , stdin);
-    freopen("TINHTONG.OUT" , "w" , stdout);
-    str n ; getline(cin , n);
+    //freopen("kstring.inp" , "r" , stdin);
+    //freopen("kstring.out" , "w" , stdout);
+    str n ; cin >> n;
     solve(n);
     return 0;
 }

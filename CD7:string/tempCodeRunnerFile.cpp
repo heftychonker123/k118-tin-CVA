@@ -10,32 +10,40 @@ using namespace std;
 #define stri string::iterator
 #define vect vector
 #define sstream stringstream
-#include <iostream>
-#include <string>
-#include <algorithm>
-using namespace std;
+#define umap unordered_map
 
-void solve(string n) {
-    reverse(n.begin(), n.end());
+void solve(str n){
+    ll length=n.size();
     str ans="";
-    // Pad with zeros to make length a multiple of 3
-    int pad = (3 - n.size() % 3) % 3;
-    n.append(pad, '0');
-
-    // Process in chunks of 3
-    for (size_t i = 0; i < n.size(); i += 3) {
-        ll temp = (n[i]-'0') + (n[i+1]-'0')*2 + (n[i+2]-'0')*4;
-        ans+= to_string(temp);
+    char t=n[0];
+    str temp = ""+t;
+    for (int i=1; i<length ; i++){
+        if(n[i-1]!=n[i]){
+            temp+=n[i];
+        }
+        else{
+            if (temp.size()>ans.size()){
+                ans=temp;
+            }
+            else if (temp.size()==ans.size()){
+                if (temp>ans) ans=temp;
+            }
+            temp=""+n[i];
+        }
     }
-    cout << ans;
+    if (temp.size()>0){
+        if (temp.size()>ans.size()){
+                ans=temp;
+            }
+        else if (temp.size()==ans.size()){
+            if (temp>ans) ans=temp;
+        }
+    }
+    cout << ans << endl;
 }
-
 int main(){
-    freopen("npbp.inp" , "r" , stdin);
-    freopen("npbp.out" , "w" , stdout);
-    ios::sync_with_stdio(false); // Tăng tốc độ nhập xuất
-    cin.tie(nullptr);
-    str n ; getline(cin , n);
-    solve(n);
+    //freopen("kstring.inp" , "r" , stdin);
+    //freopen("kstring.out" , "w" , stdout);
+    str n ; cin >> n ; solve(n);
     return 0;
 }

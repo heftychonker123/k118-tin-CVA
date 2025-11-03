@@ -37,8 +37,6 @@ void solve(str n){
 int main(){
     freopen("tachhdt.inp" , "r" , stdin);
     freopen("tachhdt.out" , "w" , stdout);
-    ios::sync_with_stdio(false); // Tăng tốc độ nhập xuất
-    cin.tie(nullptr);
     str n ; getline(cin , n);
     solve(n);
     return 0;
