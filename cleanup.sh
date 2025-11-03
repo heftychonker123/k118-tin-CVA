@@ -1,22 +1,22 @@
 #!/bin/bash
 
-#move file to their designated pos
-for file in build/*:*.cpp ; do
+# Move files to their designated positions
+for file in build/*:*.cpp; do
+    [ -e "$file" ] || continue
     prefix="${file%%:*}"
-
     mkdir -p "$prefix"
-
     mv "$file" "$prefix/"
 done
 
-#clean up the build directory
-rm -rf build;
-mkdir build;
+# Clean up the build directory
+rm -rf build
+mkdir build
 
-
-read -p "Enter commit message: " msg
-
+# Git operations
 git add .
-git commit -m "$msg"
-git push origin main
 
+# Use a default or custom commit message
+msg="${1:-Auto commit from script}"
+git commit -m "$msg"
+
+git push origin main
