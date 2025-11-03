@@ -1,12 +1,11 @@
 #!/bin/bash
 
 # Move files to their designated positions
-for file in build/*:*.cpp; do
+for file in build/*.cpp; do
     [ -f "$file" ] && echo "$file"
     [ -e "$file" ] || continue
-    prefix="${file%%:*}"
     mkdir -p "$prefix"
-    mv "$file" "$prefix/"
+    mv "build/$file" "$prefix/"
 done
 
 # Clean up the build directory
