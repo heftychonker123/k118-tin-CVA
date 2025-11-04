@@ -5,18 +5,24 @@ find . -type d | while read -r directory; do
     # Skip the root directory itself
     [ "$directory" = "." ] && continue
     [ "$(basename "$directory")" = "build" ] && continue
-    # Loop through files in the directory
+
+    # Loop through .cpp files in the directory
     for file in "$directory"/*.cpp; do
-        # Skip if it's not a regular file
         [ -f "$file" ] || continue
 
-        # Get the base filename
         filename=$(basename "$file")
-
-        # Get the directory name without path
         dirname=$(basename "$directory")
 
-        # Rename the file by prefixing the directory name
-        mv "$file" "$directory/${dirname}_${filename}"
+        # If file starts with dirname_dirname, strip one
+        if [[ "$filename" == "${dirname}_${dirname}"* ]]; then
+            new_filename="${filename#*_}"
+            mv "$file" "$directory/$new_filename"
+            continue
+        fi
+
+        # If not already prefixed, add prefix
+        if [[ "$filename" != "${dirname}_"* ]]; then
+            mv "$file" "$directory/${dirname}_${filename}"
+        fi
     done
 done
