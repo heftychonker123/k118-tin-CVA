@@ -2,10 +2,20 @@
 
 # Move files to their designated positions
 for file in build/*.cpp; do
-    [ -f "$file" ] && echo "$file"
-    [ -e "$file" ] || continue
+    [ -f "$file" ] || continue
+
+    echo "Processing: $file"
+
+    # Extract prefix before colon (e.g., foo from foo:bar.cpp)
+    filename=$(basename "$file")
+    prefix="${filename%%:*}"
+
+    # Skip if no colon found
+    [ "$prefix" = "$filename" ] && continue
+
+    # Create target directory and move file
     mkdir -p "$prefix"
-    mv "build/$file" "$prefix/"
+    mv "$file" "$prefix/"
 done
 
 # Clean up the build directory
@@ -13,10 +23,7 @@ rm -rf build
 mkdir build
 
 # Git operations
+read -p "Commit message: " msg
 git add .
-
-# Use a default or custom commit message
-msg="${1:-Auto commit from script}"
 git commit -m "$msg"
-
 git push origin main
