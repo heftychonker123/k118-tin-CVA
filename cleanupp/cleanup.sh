@@ -18,5 +18,5 @@ for file in build/*.cpp; do
     mv "$file" "$prefix/"
 done
 
-rm -rf -i ../build
-mkdir ../build
+rm -rf -i "K118 TIN CVA"/build
+mkdir "K118 TIN CVA"/build
