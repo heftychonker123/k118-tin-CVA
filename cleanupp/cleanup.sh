@@ -6,9 +6,9 @@ for file in build/*.cpp; do
 
     echo "Processing: $file"
 
-    # Extract prefix before colon (e.g., foo from foo:bar.cpp)
+    # Extract prefix before colon (e.g., foo from foo_bar.cpp)
     filename=$(basename "$file")
-    prefix="${filename%%:*}"
+    prefix="${filename%%_*}"
 
     # Skip if no colon found
     [ "$prefix" = "$filename" ] && continue
@@ -18,3 +18,5 @@ for file in build/*.cpp; do
     mv "$file" "$prefix/"
 done
 
+rm -rf -i ../build
+mkdir ../build
