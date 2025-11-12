@@ -2,7 +2,7 @@
 
 # Loop through each directory
 find . -type d | while read -r directory; do
-    # Skip the root directory itself
+    # Skip the root directory itself and 'build'
     [ "$directory" = "." ] && continue
     [ "$(basename "$directory")" = "build" ] && continue
 
@@ -13,16 +13,16 @@ find . -type d | while read -r directory; do
         filename=$(basename "$file")
         dirname=$(basename "$directory")
 
-        # If file starts with dirname_dirname, strip one
-        if [[ "$filename" == "${dirname}_${dirname}"* ]]; then
+        # Strip repeated prefix
+        while [[ "$filename" == "${dirname}_${dirname}"* ]]; do
             new_filename="${filename#*_}"
-            mv "$file" "$directory/$new_filename"
-            continue
-        fi
+            mv "$directory/$filename" "$directory/$new_filename"
+            filename="$new_filename"  # Update filename for next loop iteration
+        done
 
-        # If not already prefixed, add prefix
+        # Add prefix if missing
         if [[ "$filename" != "${dirname}_"* ]]; then
-            mv "$file" "$directory/${dirname}_${filename}"
+            mv "$directory/$filename" "$directory/${dirname}_${filename}"
         fi
     done
 done

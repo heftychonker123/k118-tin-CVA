@@ -1,22 +1,22 @@
 #!/bin/bash
 
 # Move files to their designated positions
-for file in build/*.cpp; do
+for file in ../build/*.cpp; do
     [ -f "$file" ] || continue
 
     echo "Processing: $file"
 
-    # Extract prefix before colon (e.g., foo from foo_bar.cpp)
     filename=$(basename "$file")
     prefix="${filename%%_*}"
 
-    # Skip if no colon found
+    # Skip if no underscore found
     [ "$prefix" = "$filename" ] && continue
 
     # Create target directory and move file
-    mkdir -p "$prefix"
-    mv "$file" "$prefix/"
+    mkdir -p "../$prefix"
+    mv "$file" "../$prefix/"
 done
 
-rm -rf -i "K118 TIN CVA"/build
-mkdir "K118 TIN CVA"/build
+# Clean and recreate build directory
+rm -rf ../build
+mkdir ../build
