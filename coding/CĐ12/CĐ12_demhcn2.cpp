@@ -3,6 +3,58 @@ using namespace std;
 #define ll long long
 #define vect vector
 
+bool check_solid(const vect<vect<ll>> &board , ll minr , ll maxr , ll minc , ll maxc){
+    for (int i=minr ; i<=maxr ; i++){
+        for (int j=minc ; j<=maxc ; j++){
+            if (board[i][j]==0) return false;
+        }
+    }
+    return true;
+}
+
+bool check_hollow(const vect<vect<ll>> &board , ll minr , ll maxr , ll minc , ll maxc){
+    for (int j=minc ; j<=maxc ; j++){
+        if (board[minr][j]==0 || board[maxr][j]==0) return false;
+    }
+    for (int i=minr ; i<=maxr ; i++){
+        if (board[i][minc]==0 || board[i][maxc]==0) return false;
+    }
+    return true;
+}
+
+bool check_hole(const vect<vect<ll>> &board , ll minr , ll maxr , ll minc , ll maxc){
+    int irmin=-1, irmax=-1, icmin=-1, icmax=-1;
+    for (int i=minr+1; i<maxr; i++){
+        for (int j=minc+1; j<maxc; j++){
+            if (board[i][j]==0){
+                if (irmin==-1){
+                    irmin=irmax=i;
+                    icmin=icmax=j;
+                } else {
+                    irmin=min(irmin,i);
+                    irmax=max(irmax,i);
+                    icmin=min(icmin,j);
+                    icmax=max(icmax,j);
+                }
+            }
+        }
+    }
+    if (irmin==-1) return false;
+    for (int i=irmin; i<=irmax; i++){
+        for (int j=icmin; j<=icmax; j++){
+            if (board[i][j]!=0) return false;
+        }
+    }
+    for (int i=minr+1; i<maxr; i++){
+        for (int j=minc+1; j<maxc; j++){
+            if (i<irmin || i>irmax || j<icmin || j>icmax){
+                if (board[i][j]==0) return false;
+            }
+        }
+    }
+    return true;
+}
+
 vect<pair<ll,ll>> neighbor(ll length , ll width , ll x_pos , ll y_pos){
     vect<pair<ll,ll>> dirs = {{0,1} , {0,-1} , {1,0} , {-1,0}};
     vect<pair<ll,ll>> res;
@@ -17,7 +69,7 @@ vect<pair<ll,ll>> neighbor(ll length , ll width , ll x_pos , ll y_pos){
 }
 
 void dfs(vect<vect<ll>> &board , ll length , ll width){
-    int res1 = 0 , res2 = 0;
+    int res1 = 0 , res2 = 0 , res3 = 0;
     vect<vect<bool>> visited(length, vect<bool>(width,false));
 
     for (int i = 0 ; i < length ; i++){
@@ -25,7 +77,6 @@ void dfs(vect<vect<ll>> &board , ll length , ll width){
             if (board[i][j] == 1 && !visited[i][j]){
                 stack<pair<ll , ll>> st;
                 st.push({i,j});
-                ll area = 0;
                 ll minrow=i, maxrow=i, mincol=j, maxcol=j;
 
                 while (!st.empty()){
@@ -34,7 +85,6 @@ void dfs(vect<vect<ll>> &board , ll length , ll width){
                     if (visited[cx][cy]) continue;
                     visited[cx][cy] = true;
 
-                    area++;
                     minrow = min(minrow, cx);
                     maxrow = max(maxrow, cx);
                     mincol = min(mincol, cy);
@@ -47,20 +97,22 @@ void dfs(vect<vect<ll>> &board , ll length , ll width){
                         }
                     }
                 }
-                ll row = (maxrow - minrow + 1);
-                ll col = (maxcol - mincol + 1);
-                ll expectedarea = row * col;
-                if (area == expectedarea ){
+                if (check_solid(board , minrow , maxrow , mincol , maxcol)){
                     res1++;
-                    if (row == col){
+                    res3++;
+                }
+                else if (check_hollow(board , minrow , maxrow , mincol , maxcol)){
+                    res3++;
+                    if (check_hole(board , minrow , maxrow , mincol , maxcol)){
                         res2++;
                     }
                 }
             }
         }
     }
-    cout << res2 << " " << res1-res2 << "\n";
-    return;
+    cout << res3 << "\n";
+    cout << res1 << "\n";
+    cout << res2 << "\n";
 }
 
 int main(){
