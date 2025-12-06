@@ -2,33 +2,40 @@
 using namespace std;
 #define filename "guess"
 #define ll long long
-#define ld long double
-#define str string
-#define llmin LLONG_MIN
-#define llmax LLONG_MAX
-#define pb push_back
-#define strri string::reverse_iterator
-#define stri string::iterator
 #define vect vector
-#define sstream stringstream
-#define umap unordered_map
 
-int main(){
-    freopen(filename".inp" , "r" , stdin);
-    freopen(filename".out" , "w" , stdout);
-    
-    long long n, m; 
+int main() {
+    freopen(filename".inp", "r", stdin);
+    freopen(filename".out", "w", stdout);
+
+    int n, m; 
     cin >> n >> m;
     vect<ll> v(n);
     for (int i = 0; i < n; i++) cin >> v[i];
-    
-    long long result = -1;
-    
-    for (long long i = 0; i < n-1; i++){
-        if (abs(v[i] - v[i+1]) < m){
-            result = i + 1;
+
+    set<ll> s;
+    ll min_dis = LLONG_MAX;
+    ll t=0;
+    for (const ll &i : v) {
+        if (!s.empty()) {
+            auto high_it = s.upper_bound(i);
+            auto low_it = s.lower_bound(i);
+
+            if (low_it != s.begin()) {
+                auto prev_it = low_it; 
+                --prev_it;
+                min_dis = min(min_dis, abs(i - *prev_it));
+            }
+            if (high_it != s.end()) {
+                min_dis = min(min_dis, abs(i - *high_it));
+            }
         }
+        s.insert(i);
+        if (min_dis<m){
+            cout << t+1;
+            return 0;
+        }
+        t++;
     }
-    cout << result << "\n";
     return 0;
 }

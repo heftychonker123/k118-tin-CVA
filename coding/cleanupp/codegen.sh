@@ -3,17 +3,20 @@
 echo "Loại bài là gì? :"
 read cdtype
 cdnum=""
+pname=""
+
 if [ "$cdtype" = "CĐ" ]; then
     echo "CĐ thứ bao nhiêu? :"
     read cdnum
 fi
 
-echo "Tên bài là gì? :"
-read pname
+while [ -z "$pname" ]; do
+    echo "Tên bài là gì? :"
+    read pname
+done
 
-# Sanitize pname (replace spaces with underscores)
-safe_pname=$(echo "$pname" | tr ' ' '_')
-
+# Sanitize pname (replace spaces and special chars with underscores)
+safe_pname=$(echo "$pname" | tr -d '\n' | tr -c '[:alnum:]_' '_')
 filename="${cdtype}${cdnum}_${safe_pname}"
 
 # Directories
@@ -24,11 +27,17 @@ builddir="$workdir/build"
 
 mkdir -p "$builddir"
 
+# Check template exists
+if [ ! -f "$template" ]; then
+    echo "Template file not found: $template"
+    exit 1
+fi
+
 # Create new file with boilerplate
 {
     echo "#include <bits/stdc++.h>"
     echo "using namespace std;"
-    echo "#define filename \"$pname\""
+    echo "#define filename \"$safe_pname\""
     cat "$template"
 } > "$builddir/$filename.cpp"
 
