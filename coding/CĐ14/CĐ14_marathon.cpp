@@ -1,40 +1,31 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define filename "marathon"
-#define ll long long
-#define ld long double
-#define str string
-#define llmin LLONG_MIN
-#define llmax LLONG_MAX
-#define pb push_back
-#define strri string::reverse_iterator
-#define stri string::iterator
-#define vect vector
-#define sstream stringstream
-#define umap unordered_map
+using ll = long long;
 
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
 
-int main(){
-    int n ; cin >> n;
-    vect<pair<ll,ll>> v;
-    while (n--){
-        ll a,b ; cin >> a >> b;
-        v.pb({a,b});
-    }
-    sort(v.begin() , v.end() , [&](auto a, auto b){
-        if((a.first+a.second)==(b.first+b.second)){
-            if (a.first==b.first) return a.second<b.second;
-            else return a.first<b.first;
-        }
-        return (a.first+a.second)<(b.first+b.second);
+    int n;
+    cin >> n;
+    vector<pair<ll,ll>> v(n);
+    for (auto &p : v) cin >> p.first >> p.second;
+
+    // Sắp xếp theo thời điểm hoàn tất sớm nhất, rồi theo thời gian đến, rồi theo thời gian chạy
+    sort(v.begin(), v.end(), [](auto &a, auto &b) {
+        ll fa = a.first + a.second;
+        ll fb = b.first + b.second;
+        if (fa != fb) return fa < fb;
+        if (a.first != b.first) return a.first < b.first;
+        return a.second < b.second;
     });
-    ll currtime=0;
-    for (auto i:v){
-        if (currtime>i.first){
-            currtime+=i.second;
-        }
-        else currtime = i.first + i.second;
+
+    ll curr = 0;
+    for (auto &[start, dur] : v) {
+        if (curr > start) curr += dur;
+        else curr = start + dur;
     }
-    cout << currtime;
+
+    cout << curr << "\n";
     return 0;
 }

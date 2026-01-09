@@ -10,10 +10,14 @@
 #define sstream stringstream
 #define umap unordered_map
 
-void solve(){
+void IO(){
+    freopen(filename".inp" , "r" , stdin);
+    freopen(filename".out" , "w" , stdout);
 }
-
 int main(){
-    //freopen(filename".inp" , "r" , stdin);
-    //freopen(filename".out" , "w" , stdout);
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    IO();
+    solve();
+    return 0;
 }

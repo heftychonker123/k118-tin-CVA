@@ -37,9 +37,6 @@ int main() {
         ll t ; cin >> t;
         v.pb(t);
     }
-    for (int i=0 ; i<n ; i++){
-        v.pb(v[i]);
-    }
-    Kadane(v, 2*n);
+    Kadane(v, n);
     return 0;
 }

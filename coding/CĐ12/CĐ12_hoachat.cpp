@@ -33,6 +33,8 @@ long long solve(const string &n) {
 }
 
 int main() {
+    freopen("hoachat.inp" , "r" , stdin);
+    freopen("hoachat.out" , "w" , stdout);
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     string s;

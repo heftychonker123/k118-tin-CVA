@@ -9,7 +9,6 @@ if [ "$cdtype" = "CĐ" ]; then
     echo "CĐ thứ bao nhiêu? :"
     read cdnum
 fi
-
 while [ -z "$pname" ]; do
     echo "Tên bài là gì? :"
     read pname
@@ -26,7 +25,6 @@ template="$workdir/template/template_boilerplate.cpp"
 builddir="$workdir/build"
 
 mkdir -p "$builddir"
-
 # Check template exists
 if [ ! -f "$template" ]; then
     echo "Template file not found: $template"

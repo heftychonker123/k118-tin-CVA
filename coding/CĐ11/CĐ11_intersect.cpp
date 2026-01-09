@@ -14,21 +14,16 @@ using namespace std;
 #define umap unordered_map
 
 void solve(const vector<ll>& a, const vector<ll>& b) {
-    unordered_set<ll> s(b.begin(), b.end());  // store elements of b
-    unordered_set<ll> res;  // use set to keep results sorted
-    for (const ll &i : a) {
-        if (s.find(i) != s.end()) {
-            res.insert(i);
+    umap<ll,ll> freq;
+    for (const ll &i : b) freq[i]++;
+    for (const ll &i : a){
+        if (freq[i]>0){
+            cout << i << " ";
+            freq[i]--;
         }
     }
-    vect<ll> p;
-    for (const ll &i : res){
-        p.pb(i);
-    }
-    for (auto i = p.rbegin() ; i!=p.rend() ; i++){
-        cout << *i << " ";
-    }
-    cout << "\n"; return;
+    cout << "\n";
+    return;
 }
 
 

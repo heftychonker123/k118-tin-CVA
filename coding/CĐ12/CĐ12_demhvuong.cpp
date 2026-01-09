@@ -3,75 +3,86 @@ using namespace std;
 #define ll long long
 #define vect vector
 
-vect<pair<ll,ll>> neighbor(ll length , ll width , ll x_pos , ll y_pos){
-    vect<pair<ll,ll>> dirs = {{0,1} , {0,-1} , {1,0} , {-1,0}};
+vect<pair<ll,ll>> neighbor(ll length, ll width, ll x_pos, ll y_pos){
+    vect<pair<ll,ll>> dirs = {{0,1}, {0,-1}, {1,0}, {-1,0}};
     vect<pair<ll,ll>> res;
     for (const auto &dir : dirs){
         ll x_neighbor = x_pos + dir.first;
         ll y_neighbor = y_pos + dir.second;
-        if (x_neighbor < length && y_neighbor < width && x_neighbor >= 0 && y_neighbor >= 0){
-            res.push_back({x_neighbor,y_neighbor});
+        if (x_neighbor < length && y_neighbor < width && 
+            x_neighbor >= 0 && y_neighbor >= 0){
+            res.push_back({x_neighbor, y_neighbor});
         }
     }
     return res;
 }
 
-void dfs(vect<vect<ll>> &board , ll length , ll width){
-    int res1 = 0 , res2 = 0;
-    vect<vect<bool>> visited(length, vect<bool>(width,false));
-
-    for (int i = 0 ; i < length ; i++){
-        for (int j = 0 ; j < width ; j++){
+void countRectangles(vect<vect<ll>> &board, ll rows, ll cols){
+    ll squares = 0, rectangles = 0;
+    vect<vect<bool>> visited(rows, vect<bool>(cols, false));
+    
+    for (ll i = 0; i < rows; i++){
+        for (ll j = 0; j < cols; j++){
             if (board[i][j] == 1 && !visited[i][j]){
-                stack<pair<ll , ll>> st;
-                st.push({i,j});
+                stack<pair<ll, ll>> st;
+                st.push({i, j});
                 ll area = 0;
-                ll minrow=i, maxrow=i, mincol=j, maxcol=j;
-
+                ll minRow = i, maxRow = i, minCol = j, maxCol = j;
+                
                 while (!st.empty()){
                     auto [cx, cy] = st.top();
                     st.pop();
+                    
                     if (visited[cx][cy]) continue;
                     visited[cx][cy] = true;
-
                     area++;
-                    minrow = min(minrow, cx);
-                    maxrow = max(maxrow, cx);
-                    mincol = min(mincol, cy);
-                    maxcol = max(maxcol, cy);
-
-                    vect<pair<ll,ll>> n = neighbor(length,width,cx,cy);
-                    for (const auto &p : n){
-                        if (board[p.first][p.second] == 1 && !visited[p.first][p.second]){
-                            st.push(p);
+                    
+                    minRow = min(minRow, cx);
+                    maxRow = max(maxRow, cx);
+                    minCol = min(minCol, cy);
+                    maxCol = max(maxCol, cy);
+                    
+                    vect<pair<ll,ll>> neighbors = neighbor(rows, cols, cx, cy);
+                    for (const auto &[nx, ny] : neighbors){
+                        if (board[nx][ny] == 1 && !visited[nx][ny]){
+                            st.push({nx, ny});
                         }
                     }
                 }
-                ll row = (maxrow - minrow + 1);
-                ll col = (maxcol - mincol + 1);
-                ll expectedarea = row * col;
-                if (area == expectedarea ){
-                    res1++;
-                    if (row == col){
-                        res2++;
+                
+                ll height = maxRow - minRow + 1;
+                ll width = maxCol - minCol + 1;
+                ll expectedArea = height * width;
+                
+                if (area == expectedArea){
+                    if (height == width){
+                        squares++;
+                    } else {
+                        rectangles++;
                     }
                 }
             }
         }
     }
-    cout << res2 << " " << res1-res2 << "\n";
-    return;
+    
+    cout << squares << " " << rectangles << "\n";
 }
 
 int main(){
-    int m,n; 
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    
+    ll m, n; 
     cin >> m >> n;
-    vect<vect<ll>> v(m, vect<ll>(n));
-    for (int i=0 ; i<m ; i++){
-        for (int j=0 ; j<n ; j++){
-            cin >> v[i][j];
+    vect<vect<ll>> board(m, vect<ll>(n));
+    
+    for (ll i = 0; i < m; i++){
+        for (ll j = 0; j < n; j++){
+            cin >> board[i][j];
         }
     }
-    dfs(v,m,n);
+    
+    countRectangles(board, m, n);
+    
     return 0;
 }

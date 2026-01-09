@@ -15,13 +15,15 @@ for file in "$workdir"/build/*.cpp; do
     # Skip if no underscore found
     [ "$prefix" = "$filename" ] && continue
 
-    # Create target directory and move file
+    # Create target directory
     mkdir -p "$workdir/$prefix"
-    mv "$file" "$workdir/$prefix"
-    echo "Moving file : $filename"
-    echo "From : $workdir/build"
-    echo "To : $workdir/$prefix"
     echo
+    echo "Moving file : $filename"
+    mv "$file" "$workdir/$prefix"
+    echo "From : $workdir/build"
+    echo "To   : $workdir/$prefix"
+    echo
+    sleep 0.5;
 done
 
 # Clean and recreate build directory safely
@@ -29,3 +31,4 @@ if [ -d "$workdir/build" ]; then
     rm -rf "$workdir/build"
 fi
 mkdir "$workdir/build"
+echo "Code execution successful."
