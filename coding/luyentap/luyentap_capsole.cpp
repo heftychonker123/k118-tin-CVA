@@ -1,3 +1,6 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define filename "capsole"
 #define ll long long
 #define ld long double
 #define str string
@@ -9,18 +12,12 @@
 #define vect vector
 #define sstream stringstream
 #define umap unordered_map
-
-void IO(){
-    if (fopen(filename".inp" , "r"))
-    {
-    freopen(filename".inp" , "r" , stdin);
-    freopen(filename".out" , "w" , stdout);
-    }
+void solve(str s){
+    queue<char> q1;
+    queue<char> q2;
 }
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-    IO();
-    solve();
     return 0;
 }

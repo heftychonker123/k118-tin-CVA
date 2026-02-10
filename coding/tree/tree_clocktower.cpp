@@ -1,3 +1,6 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define filename "clocktower"
 #define ll long long
 #define ld long double
 #define str string
@@ -10,12 +13,20 @@
 #define sstream stringstream
 #define umap unordered_map
 
+void solve(){
+    ll n ; cin >> n;
+    vect<ll> time(n);
+    for (int i=0 ; i<n ; i++) cin >> time[i];
+    vect<vect<ll>> tree(n);
+    for (int i=1 ; i<n ; i++){
+        ll a,b ; cin >> a >> b;
+        tree[a-1].pb(b-1);
+        tree[b-1].pb(a-1);
+    }
+}
 void IO(){
-    if (fopen(filename".inp" , "r"))
-    {
     freopen(filename".inp" , "r" , stdin);
     freopen(filename".out" , "w" , stdout);
-    }
 }
 int main(){
     ios::sync_with_stdio(false);

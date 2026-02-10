@@ -13,7 +13,18 @@ using namespace std;
 #define sstream stringstream
 #define umap unordered_map
 
-vect<pair<ll,ll>> neighbor(vect<vect<ll>> board , ll length , ll width , ll x_pos , ll y_pos){ vect<pair<ll,ll>> dirs = {{0,1} , {0,-1} , {1,0} , {-1,0}}; vect<pair<ll,ll>> res; for (const auto &dir : dirs){ ll x_neighbor = x_pos + dir.first; ll y_neighbor = y_pos + dir.second; if (x_neighbor<length && y_neighbor<width && x_neighbor>=0 && y_neighbor>=0){ res.pb({x_neighbor,y_neighbor}); } } return res; }
+vect<pair<ll,ll>> neighbor(vect<vect<ll>> board , ll length , ll width , ll x_pos , ll y_pos){ 
+    vect<pair<ll,ll>> dirs = {{0,1} , {0,-1} , {1,0} , {-1,0}}; 
+    vect<pair<ll,ll>> res; 
+    for (const auto &dir : dirs){ 
+        ll x_neighbor = x_pos + dir.first; 
+        ll y_neighbor = y_pos + dir.second; 
+        if (x_neighbor<length && y_neighbor<width && x_neighbor>=0 && y_neighbor>=0){ 
+            res.pb({x_neighbor,y_neighbor});
+        }
+    } 
+    return res; 
+}
 void dfs(vect<vect<ll>> &board , ll length , ll width){
     ll res = 0;
     stack<pair<ll , ll>> st;

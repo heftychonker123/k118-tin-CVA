@@ -1,3 +1,6 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define filename "giaithua"
 #define ll long long
 #define ld long double
 #define str string
@@ -9,18 +12,22 @@
 #define vect vector
 #define sstream stringstream
 #define umap unordered_map
-
+ll frac(ll n){
+    if (n==0) return 1;
+    else return frac(n-1) * n;
+}
+void solve(){
+    ll n ; cin >> n;
+    cout << frac(n);
+}
 void IO(){
-    if (fopen(filename".inp" , "r"))
-    {
     freopen(filename".inp" , "r" , stdin);
     freopen(filename".out" , "w" , stdout);
-    }
 }
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-    IO();
+    //IO();
     solve();
     return 0;
 }

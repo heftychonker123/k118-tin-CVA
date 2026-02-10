@@ -1,3 +1,6 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define filename "temp"
 #define ll long long
 #define ld long double
 #define str string
@@ -9,18 +12,16 @@
 #define vect vector
 #define sstream stringstream
 #define umap unordered_map
-
+void solve(){
+    cout << DBL_MAX << "\n";
+}
 void IO(){
-    if (fopen(filename".inp" , "r"))
-    {
     freopen(filename".inp" , "r" , stdin);
     freopen(filename".out" , "w" , stdout);
-    }
 }
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-    IO();
     solve();
     return 0;
 }

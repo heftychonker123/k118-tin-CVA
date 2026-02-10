@@ -1,3 +1,6 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define filename "xaunhiphan"
 #define ll long long
 #define ld long double
 #define str string
@@ -9,18 +12,23 @@
 #define vect vector
 #define sstream stringstream
 #define umap unordered_map
-
-void IO(){
-    if (fopen(filename".inp" , "r"))
-    {
-    freopen(filename".inp" , "r" , stdin);
-    freopen(filename".out" , "w" , stdout);
+str sinh(str s){
+    ll i=s.size()-1;
+    while (i>-1 && s[i] == '1'){
+        s[i] = '0';
+        i--;
     }
+    if (i>=0) s[i] = '1';
+    return s;
 }
+void solve(){
+    str s ; cin >> s;
+    cout << sinh(s) << "\n";
+}
+
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-    IO();
     solve();
     return 0;
 }
