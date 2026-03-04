@@ -1,8 +1,8 @@
 #!/bin/bash
-
-
-filedir=$(cd "$(dirname "$0")" && pwd)
+cd "$(dirname "$0")" || exit 1
+filedir=$(pwd)
 workdir=$(dirname "$filedir")
+
 echo "Target folder name:"
 read target
 mkdir -p "$workdir/${target}_sorted"
