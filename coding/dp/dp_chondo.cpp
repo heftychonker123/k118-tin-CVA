@@ -1,48 +1,41 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define filename "chondo"
 #define ll long long
-#define pb push_back
-#define vect vector
 
-void IO(){
-    if (fopen(filename".inp" , "r"))
-    {
-    freopen(filename".inp" , "r" , stdin);
-    freopen(filename".out" , "w" , stdout);
-    }
-}
-int main(){
+int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-    IO();
-    ll n,w ; cin >> n >> w;
-    vect<ll> price(n) , weight(n);
-    for (int i = 0 ; i<n ; i++) cin >> weight[i] >> price[i];
-    vect<ll> prevDP(w+1 , 0);
-    vect<vect<ll>> trace(n+1, vect<ll>(w+1 , false));
-    for (int i=1 ; i<=n ; i++){
-        vect<ll> currDP(w+1 , 0);
-        for (int j=1 ; j<=w ; j++){
-            ll exclude = prevDP[j];
-            ll include = LLONG_MIN;
-            if (j>=weight[i-1]){
-                include = prevDP[j-weight[i-1]] + price[i-1];
-            }
-            if (include > exclude){
-                currDP[j] = include;
-                trace[i][j] = j - weight[i-1];
-            }
-            else{
-                currDP[j] = exclude;
-                trace[i][j] = j;
+
+    int N, V; 
+    cin >> N >> V;
+    vector<int> A(N+1), B(N+1);
+    for (int i = 1; i <= N; i++) cin >> A[i] >> B[i];
+
+    vector<vector<int>> dp(N+1, vector<int>(V+1, 0));
+    vector<vector<int>> trace(N+1, vector<int>(V+1, 0));
+
+    for (int i = 1; i <= N; i++) {
+        for (int j = 0; j <= V; j++) {
+            dp[i][j] = dp[i-1][j];
+            trace[i][j] = 0; 
+            if (j >= A[i] && dp[i-1][j - A[i]] + B[i] > dp[i][j]) {
+                dp[i][j] = dp[i-1][j - A[i]] + B[i];
+                trace[i][j] = 1; 
             }
         }
-        for (const ll &i : prevDP) cout << i << " ";
-        cout << "\n";
-        prevDP = currDP;
     }
-    for (const ll &i : prevDP) cout << i << " ";
-    cout << "\n";
-    cout << "\n";
+
+    cout << dp[N][V] << "\n";
+
+    
+    vector<int> res;
+    int j = V;
+    for (int i = N; i >= 1; i--) {
+        if (trace[i][j]) {
+            res.push_back(i);
+            j -= A[i];
+        }
+    }
+    reverse(res.begin(), res.end());
+    for (int x : res) cout << x << " ";
 }

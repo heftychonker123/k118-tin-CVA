@@ -16,7 +16,8 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     IO();
-    str s1,s2 ; cin >> s1 >> s2;
+    str s1,s2 ; cin >> s1;
+    for (int i=s1.size()-1 ; i>=0 ; i--) s2 += s1[i];
     vect<ll> prevdp(s2.size()+1 , 0);
     vect<vect<str>> trace(s1.size() + 1 , vect<str>(s2.size()+1 , ""));
     // Ta xét lần lượt các ký tự của s1 và s2

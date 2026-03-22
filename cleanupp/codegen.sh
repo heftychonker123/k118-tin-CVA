@@ -39,10 +39,9 @@ fi
     cat "$template"
 } > "$builddir/$filename.cpp"
 
-# Open in VS Code
+# Open in VS Codeis
 if ! pwd >/dev/null 2>&1; then
     cd "$HOME"
 fi
 code "$builddir/$filename.cpp"
 echo "Đã tạo file: $filename.cpp"
-

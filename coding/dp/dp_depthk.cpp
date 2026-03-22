@@ -22,36 +22,30 @@ int main() {
     ll half = n / 2;
 
     
-    vector<vector<ll>> dp(half + 1, vector<ll>(m + 1, 0));
-    vector<vector<ll>> next_dp(half + 1, vector<ll>(m + 1, 0));
+    vector<vector<vector<ll>>> dp(n + 1,
+        vector<vector<ll>>(half + 1, vector<ll>(m + 1, 0)));
 
-    dp[0][0] = 1;
-    ll MOD = 123456789;
+    dp[0][0][0] = 1;
 
     for (int i = 1; i <= n; i++) {
-        for (int j = 0; j <= half; j++) {
-            fill(next_dp[j].begin(), next_dp[j].end(), 0);
-        }
-        
         for (int j = 0; j <= half; j++) {
             for (int k = 0; k <= m; k++) {
                 
                 if (j > 0) {
                     int newDepth = max((ll)k, (ll)j);
                     if (newDepth <= m) {
-                        next_dp[j][newDepth] = (next_dp[j][newDepth] + dp[j - 1][k]) % MOD;
+                        dp[i][j][newDepth] += dp[i - 1][j - 1][k];
                     }
                 }
                 
                 if (j < half) {
-                    next_dp[j][k] = (next_dp[j][k] + dp[j + 1][k]) % MOD;
+                    dp[i][j][k] += dp[i - 1][j + 1][k];
                 }
             }
         }
-        swap(dp, next_dp);
     }
 
     
-    cout << dp[0][m] << "\n";
+    cout << dp[n][0][m] << "\n";
     return 0;
 }

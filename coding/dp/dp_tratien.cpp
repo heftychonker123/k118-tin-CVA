@@ -22,8 +22,6 @@ ll dp(ll x, vect<ll> &coins, vect<ll> &memo, vect<ll> &choice) {
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-    freopen("tratien.inp" , "r" , stdin);
-    freopen("tratien.out" , "w" , stdout);
     ll n, x; 
     cin >> n >> x;
     vect<ll> coins(n);

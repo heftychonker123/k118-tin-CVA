@@ -5,7 +5,6 @@ using namespace std;
 #define llmax LLONG_MAX
 #define vect vector
 void dp(ll n , vect<ll> &t , vect<ll> &r , vect<ll> &table){
-    // DP forward
     for (int i=1 ; i<=n ; i++){
         ll normal = table[i-1] + t[i-1];
         ll skip = llmax;
@@ -17,7 +16,6 @@ void dp(ll n , vect<ll> &t , vect<ll> &r , vect<ll> &table){
 
     cout << table[n] << "\n";
 
-    // Traceback
     ll trace = n;
     vect<ll> skipped;
     while (trace > 0){

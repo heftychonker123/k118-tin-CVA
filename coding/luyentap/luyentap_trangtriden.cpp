@@ -1,3 +1,6 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define filename "ttd"
 #define ll                  long long
 #define llmin               LLONG_MIN
 #define llmax               LLONG_MAX
@@ -6,8 +9,6 @@
 #define FOR(i , m , n)      for (int i=m ; i<n ; i++)
 #define FOR_r(i , m , n)    for (int i=m ; i>n ; i--)
 void IO(){
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
     if (fopen(filename".inp" , "r"))
     {
     freopen(filename".inp" , "r" , stdin);
@@ -15,7 +16,10 @@ void IO(){
     }
 }
 int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
     IO();
-    solve();
+    ll a,b ; cin >> a >> b;
+    cout << ((a-1)/2 + 1)*b << "\n";
     return 0;
 }
