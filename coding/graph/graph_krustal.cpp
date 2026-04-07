@@ -58,6 +58,6 @@ signed main(){
     ll n,m ; cin >> n >> m;
     vect<array<ll,3>> v(m);
     for (ll i=0 ; i<m ; i++) cin >> v[i][0] >> v[i][1] >> v[i][2];
-    cout << min_spanning_tree(v,n);
+    cout << n-1 << " " << min_spanning_tree(v,n);
     return 0;
 }
