@@ -34,6 +34,7 @@ void unite(vect<ll> &rep , vect<ll> &size , ll a , ll b){
     size[a]+=size[b] ; rep[b] = a;
 }
 
+
 ll min_spanning_tree(vect<array<ll,3>> edges , ll n){
     //DSU data structures(i am lazy to implement a class so here we go)
     vect<ll> rep(n) , size(n);
@@ -58,6 +59,6 @@ signed main(){
     ll n,m ; cin >> n >> m;
     vect<array<ll,3>> v(m);
     for (ll i=0 ; i<m ; i++) cin >> v[i][0] >> v[i][1] >> v[i][2];
-    cout << n-1 << " " << min_spanning_tree(v,n);
+    cout << min_spanning_tree(v,n);
     return 0;
 }

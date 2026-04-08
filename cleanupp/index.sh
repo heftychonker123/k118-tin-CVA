@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 # Program to execute the cleanup files at regular intervals
 
 filedir=$(cd "$(dirname "$0")" && pwd)

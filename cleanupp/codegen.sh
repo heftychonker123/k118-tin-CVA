@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 echo "Loại bài là gì? :"
 read cdtype
@@ -43,5 +43,5 @@ fi
 if ! pwd >/dev/null 2>&1; then
     cd "$HOME"
 fi
-code "$builddir/$filename.cpp"
+"/c/Users/$USERNAME/AppData/Local/Programs/Microsoft VS Code/Code.exe" "$builddir/$filename.cpp"
 echo "Đã tạo file: $filename.cpp"

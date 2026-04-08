@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Get the directory containing the script
 filedir=$(cd "$(dirname "$0")" && pwd)
