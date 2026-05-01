@@ -1,1 +1,3 @@
 build/
+judge/judge_target.cpp
+judge/*.exe

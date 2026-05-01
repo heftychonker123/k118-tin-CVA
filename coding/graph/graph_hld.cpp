@@ -13,7 +13,7 @@ const ll MAXN = 1000;
 ll mat[MAXN][MAXN] , dist[MAXN][MAXN] , trace[MAXN][MAXN];
 
 void floyd(ll n) {
-    fill(&dist[0][0], &dist[0][0] + MAXN * MAXN, (ll)1e9);
+    fill(&dist[0][0], &dist[0][0] + MAXN * MAXN, (ll)1e15);
     fill(&trace[0][0], &trace[0][0] + MAXN * MAXN, -1);
 
     FOR(i, 0, n) dist[i][i] = 0;
@@ -48,16 +48,12 @@ void solve(ll n){
     FOR(i, 0, n){
         ll longest = 0;
         FOR(j, 0, n){
-            longest = max(longest, dist[j][i]); // khoảng cách từ j đến i
+            longest = max(longest, dist[j][i]);
         }
         if (longest < bestDist){
             bestDist = longest;
             bestCity = i+1;
         }
-    }
-    if (bestDist == 1e9){
-        cout << -1;
-        return;
     }
     cout << bestCity << " " << bestDist << "\n";
 
