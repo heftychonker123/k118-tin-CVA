@@ -1,0 +1,1 @@
+{"name":"Local: target","url":"c:\\Users\\chonker\\Documents\\k118-tin-CVA\\judge\\target.cpp","tests":[{"id":1777818726594,"input":"4 10\n7 3 +3\n4 2 -1\n9 3 -1\n1 1 +2","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\chonker\\Documents\\k118-tin-CVA\\judge\\target.cpp","group":"local","local":true}
