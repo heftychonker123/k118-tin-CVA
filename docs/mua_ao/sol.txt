@@ -1,0 +1,33 @@
+cách 1: quy hoạch động f[i][j][k] là hàng i, số áo là j, còn đi tiếp được k hàng
+
+khi đó từ trạng thái (i,j,k) -> (i+1 , j , r-1) nếu ta ko tạt qua hàng , 
+                                (i , j , j) nếu ta chỉ sưởi và (i,j+1,j+1) nếu ta mua áo luôn
+
+cách 2: giảm chiều quy hoạch động xuống chỉ còn f[i][j] 
+
+khi đó ta có từ (i,j):
+-> (i + t , j) với t >= 1 , t <= j
+-> (i + t , j + 1) với t>=1 , t <= j+1
+
+do đó ta có quan hệ dp sau:
+dp[i][j] -> dp[i-t][j-1] với 1 <= t <= j
+         -> dp[i-t][j] với 1 <= t <= j
+
+-> monotonic deque
+
+cách 3: ta để ý như sau:
+
++) Với 1 áo thì ta sẽ phải đi tạt qua hàng n lần
++) 2 áo thì n/2 lần
++) 3 áo thì n/3 lần ...
+
+do đó số lượng lần sưởi mỗi lần mua áo thì sẽ là : n/i - n/i+1 (i là số áo hiện tại)
+
+ta có n/i - n/i+1 = n / (i) * (i+1) 
+do đó nếu ta mua lượng áo >= sqrt(n) rồi thì không cần phải mua thêm nữa 
+
+-> giảm được dp xuống O(n * sqrt(n))
+
+-> hoàn tất
+
+về mặt cài đặt thì i >= j nên cho dp ta sẽ xét khoảng từ i-j -> i - 1

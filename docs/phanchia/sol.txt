@@ -1,0 +1,46 @@
+Xét đồ thị G(V,E):
++) Nếu đồ thị này mà có tất cả cạnh là cạnh chẵn thì ok
+
++) Nếu không thì sẽ tồn tại 1 điểm u thỏa mãn u bậc lẻ
+
+ta xây dựng đồ thị H'(V' , E') bằng cách loại bỏ điểm u
+
+Xét E', ta có ba trường hợp sau
++) (x,y) ko lke voi u
++) (x,y) có 1 điểm liền kề với u
++) cả x và y đều liền kề với u
+
+nếu mà (x,y) kề với u mà ko có cạnh -> ta thêm cạnh (x,y) vào H
+ngược lại: ta xóa cạnh (x,y)
+
+ta tìm cách phân chia cho H'
+quay trở lại với G, giờ ta sẽ tìm cách để cho u vào 1 nhóm
+
+giả sử H' phân chia thành 2 tập đỉnh A,B
+Gọi tập các đỉnh kề u trong G là S
+
+KMTTQ, giả sử S^A chẵn, S^B lẻ (điều này là đương nhiên vì u có bậc lẻ)
+
+Xét A, ta có các TH sau:
++) x thuộc A, x ko kề u -> tất cả các cạnh của x giữ nguyên, gọi số lượng các cạnh này là p
++) x kề với u
+ta xét đồ thị Q:
++) số lượng cạnh (x,z) là p , cạnh (x,u) là 1 , cạnh (x,y) kề u sẽ là q
+Ta xét đồ thị H' thì ta có:
++) số lượng cạnh (x,z) ko kề u là p , cạnh (x,u) sẽ là 0 , (x,y) kề u sẽ là 2*k - q - 1 (2k = |s^a|)
+
+lý do tại sao số lượng cạnh (x,y) là 2*k - q - 1: 
+-1 : chính x
+-q : trừ cho những cạnh (x,y) có cả x,y kề với u
+2*k : thêm vào cho những cặp (x,y) kề u nhưng ko có cạnh
+
+số lượng cạnh kề u trong H' chẵn -> p + 2*k - q - 1 chẵn
+lại có p + q + 1 + p + 2*k - q - 1 = 2 * (p+k) chẵn -> p + q + 1 chẵn
+-> Trong đồ thị G thì số bậc của x vẫn chẵn
+
+Tương tự như thế, ta chứng minh rằng cho u vào B cũng ko sao
+
+-> Ta có thể hoàn thành bài này như sau:
+
++) Với mỗi đồ thị H' , ta loại bỏ dần các đỉnh mà có bậc lẻ và bổ sung thêm các cạnh như đã viết ở trên
++) Khi đồ thị H' đều là bậc chẵn thì khi đó ta sẽ có đáp số là các điểm còn lại của đồ thị 
