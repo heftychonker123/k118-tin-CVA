@@ -1,0 +1,49 @@
+Bài này ta phải sử dụng offline deletion bằng DSU + segment tree
+
+Với mỗi cạnh tồn tại trong đồ thị thì sẽ có 1 khoảng thời gian mà nó tồn tại trong đồ thị
+
+Do đó , ta có thể làm như sau:
+Với mỗi khoảng thời gian t, nếu đoạn z mà đang tồn tại thì ta sẽ cho cạnh này thêm vào đồ thị
+-> DSU merge
+
+Cách này sẽ TLE bởi vì các cạnh đang được thêm vào [R - L + 1] lần ([L,R] là khoảng thời gian tồn tại của cạnh)
+
+
+Vậy thay vì cho thêm cạnh vào, ta sẽ làm như sau:
+
+Xây 1 segment tree trên trục thời gian
+
+Để có thể là xử lý việc 1 đoạn z active trên 1 khoảng thời gian, 
+ta sẽ làm giống lazy prop đó là chỉ lưu các đoạn lớn nhất mà khoảng tg active đang chứa
+Ta ko cần phải đẩy lazy xuống vì chính việc cho thêm cạnh này vào DSU hiện thời đã có thể coi là đẩy xuống con rồi
+
+Nhưng mà nếu ta mà chỉ query lần lượt từng khoảng thời gian thì ta vẫn sẽ bị insert lặp cạnh
+(do ta đi qua 1 node nhiều lần) -> Ko tối ưu cho lắm
+Do đó, ta sẽ tìm cách để chỉ phải đi qua 1 lần mọi node mà vẫn có kết quả cho tất cả mọi thời gian
+
+thay vì query từng node ta sẽ dfs qua toàn bộ segment tree
+
+Quy trình dfs:
++) Lấy hết các cạnh của node hiện thời là u
++) Nếu u là con thì ta lấy số thành phần liên thông của u và lưu vào mảng đáp án
++) for v là con của u: dfs(u)
++) Xóa các cạnh của u
+
+quy trình thêm cạnh thì sử dụng DSU
+còn xóa cạnh thì dễ thấy là khi đến giai đoạn xóa cạnh thì các update top sẽ chỉ là các update ở u -> Rollback
+
+Độ phức tạp:
+
++) Mỗi cạnh sẽ chỉ được update nhiều nhất O(log(q)) lần
++) DSU và rollback : Qlog(Q)
+
+-> Q * (log(q) ^ 2)
+
+-> ok
+
+PS:
+
+dm bài này lời giải trên mạng khó hiểu vcl, phải hỏi chatgpt mới hiểu
+dm cp algorithm
+
+được cái chatgpt nói cũng dễ hiểu

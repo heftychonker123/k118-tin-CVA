@@ -1,0 +1,18 @@
+P < 1e9 nên ta ko thể lưu tất cả vào set
+
+Thay vì thế, ta lưu với các khoảng liên tiếp thôi
+
+Ta sẽ xử lý mỗi truy vấn như sau:
++) Xử lý người ở đầu hàng
+Ta lấy khoảng liên tiếp đầu tiên, gọi là [l,r]
+
+Ta tách thành 2 khoảng [l , l] và [l+1 , r]
+đẩy [l,l] xuống cuối
++) Đẩy 1 người lên đầu
+Ta xác định khoảng chứa người này là [l,r]
+tách thành [l,x-1] và [x+1 , r] và giữ nguyên vị trí
+[x , x] thì đẩy lên đầu
+
+dễ thấy, số lượng kcach ko quá c
+mà mỗi query c thì O(c) 
+-> đpt: O(c^2)

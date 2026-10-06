@@ -1,0 +1,24 @@
+Ta có bài toán sau:
+
+Xét Q truy vấn, mỗi truy vấn gồm 2 số A , B; tìm số nhóm búp bê bé nhất thỏa mãn:
++) Mỗi nhóm búp bê là 1 cái increasing subsequence của đường kính và chiều cao của nó(1)
++) Đường kính >= A , chiều cao <= B 
+
+Ta thấy rằng bài toán nhóm búp bê nhỏ nhất này có thể giải rất dễ 
+
+-> Với subtask 2: N,Q<=2000 thì ta làm trâu là ok =))
+
+Giả sử với tất cả các truy vấn B là INF thì ta có thể giải bằng cách sau:
++) Sắp xếp các truy vấn theo A giảm dần
++) Ta thêm các phần tử từ phải -> trái và trả lời các truy vấn theo thứ tự
+Để trả lời các truy vấn thì ta chỉ cần LIS của hiện thời thôi, việc này có thể thực hiện trong O(nlog(n)) 
+tối đa với cách này
+
+Còn nếu B thay đổi tùy ý thì sao?
+
+Ta có thể hiểu mảng dp như sau:
++) mỗi dp_i sẽ là phần tử bé nhất thỏa mãn việc ta phải cho phần tử này vào nhóm thứ i 
+
+Do đó, để tìm số lượng nhóm cần thiết để phủ các búp bê thỏa mãn điều kiện (1) hiện thời :
+Ta sẽ chỉ cần tìm kiểm nhị phân trên mảng dp để tìm vị trí xa nhất mà <= B là được
+

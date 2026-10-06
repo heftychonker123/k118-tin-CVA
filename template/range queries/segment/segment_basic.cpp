@@ -1,36 +1,36 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define ll long long
-#define pii pair<int,int>
-#define fi first
-#define se second
-const bool debug = false;
-const string filename = "TINHTONG";
+#define ll long long 
 
-const int MOD = 1e9 + 7;
-const ll INF = 1e16;
+struct Node{
+    int sum;
+};
 
-const int MAXN = 2e5 + 5;
-ll st[4 * MAXN];
+Node merge(Node a , Node b){
+    return {a.sum + b.sum};
+}
 
-void update(int pos , ll x , int cl , int cr , int ci){
-    if (cl == cr){
-        st[ci] = x;
-        return;
+struct SegmentTree{
+    vector<Node> st;
+    void update(int pos , int x , int cl , int cr , int ci){
+        if (cl == cr){
+            st[ci].sum+=x;
+            return;
+        }
+
+        int cm = (cl + cr)/2;
+        if (pos <= cm) update(pos , x , cl , cm , ci * 2);
+        else update(pos , x , cm + 1 , cr , ci * 2 + 1);
+
+        st[ci] = merge(st[ci * 2] , st[ci * 2 + 1]);
     }
 
-    int cm = (cl + cr)/2;
-    if (pos <= cm) update(pos , x , cl , cm , ci*2);
-    else update(pos , x , cm + 1 , cr , ci * 2 + 1);
-    st[ci] = st[ci * 2] + st[ci * 2 + 1];
-}
+    Node query(int l , int r , int cl , int cr , int ci){
+        if (l > cr || r < cl) return {0};
+        if (l <= cl && cr <= r) return st[ci];
 
-ll query(int l , int r , int cl , int cr , int ci){
-    if (l > r) return 0LL;
-    if (l == cl && r == cr) return st[ci];
+        int cm = (cl + cr)/2;
+        return merge(query(l , r , cl , cm , ci * 2) , query(l , r , cm + 1 , cr , ci * 2 + 1));
+    }
+};
 
-    int cm = (cl + cr)/2;
-    ll left = query(l , min(cm,r) , cl , cm , ci * 2);
-    ll right = query(max(l , cm + 1) , r , cl , cr , ci * 2 + 1);
-    return left + right;
-}

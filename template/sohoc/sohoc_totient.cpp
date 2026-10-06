@@ -18,6 +18,5 @@ void compute(){
 signed main(){
     compute();
     int n = 20;
-    //1	1	2	2	4	2	6	4	6	4	10	4	12	6	8	8	16	6	18	8
     for (int i=1 ; i<=20 ; i++) cout << phi[i] << "\n";
 }

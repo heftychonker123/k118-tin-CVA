@@ -1,0 +1,56 @@
+Lời giải này là dành cho đến subtask 4 của bài này
+
+Đề bài: Cho n điểm và 2 số nguyên dương h,w ; tìm số điểm lớn nhất có thể phủ bởi 1 hình chữ nhật h*w:
+
+subtask 4: n <= 1e5 , xi , yi , h , w <= 1e5
+
+Ta sẽ tiến hành sweep line trên trục x
+
+Ta thấy rằng khi ta sweep đến x:
++) Các điểm mà ta có thể phủ được sẽ có xi >= x - w
++) Với các điểm có thể phủ được, gọi cnt[y] là số điểm phủ được có yi = y
+
+Khi đó ta có số điểm phủ được tối đa khi ta sweep được đến x là:
+max(sum(cnt[i -> i + h])) 
+
+-> Bài toán quy về 2 vấn đề
++) Bỏ đi các điểm mà có xi = x - w - 1 và thêm các điểm có xi = x
++) Tìm max tổng subarray độ dài h 
+
+Ta sẽ giải quyết vấn đề 2 trước:
+để giải quyết vấn đề này, ta sẽ sử dụng cấu trúc segment tree
+Ta có: Khi ta bổ sung thêm 1 điểm (xi , yi) vào thì subarray từ 1 -> yi ++; 
+còn lấy max thì đây sẽ là query đoạn 
+
+-> segment tree lazy update là được
+
+Giờ quay trở lại vấn đề 1:
++) Để giải quyết việc ta phải biết các điểm có xi = x-w-1 và xi = x:
+ta sẽ sử dụng mảng z[i]: lưu trữ các y của các điểm có x = i
+Khi đó,
++) Với các phần tử trong z[x-w-1] : xóa đi phần tử đó(aka cập nhật đoạn -1 trong segment)
++) Với các phần tử trong z[x] : thêm phần tử đó(aka cập nhật đoạn +1 trong segment)
+
+
+
+Độ phức tạp thuật toán:
++) Truy cập các phần tử của z: tổng cộng sẽ là O(n) 
++) Cập nhật: Với n phần tử là O(log(n)) -> O(nlog(n))
++) Truy vấn: Với ~ 2e5 đường sweep -> O(2e5 * log(n)) 
+
+với n <= 1e5 thì đây là rất thoải mái
+
+PS:
+Đây là 1 câu trong đề thi chọn ĐTHSG của tình Quảng Trị năm 2024
+với bài này đến subtask 4 là khoảng 65% số điểm rồi nên cũng khá thành công
+
+thực chất subtask còn có cái này nữa:
++) một trong các hình chữ nhật kết quả có góc trên bên phải là một trong các điểm đã cho
+
+nma cảm giác là nó ko liên quan lắm
+
+để làm subtask 5 chắc có thể nén tọa độ rồi tìm cách nào đó để tìm hình chữ nhật phủ nhiều nhất
+
+Thực chất là đây cũng chính là lời giải của bài này luôn nhưng mà do chưa nén tọa độ được nên ko biết sẽ thế nào
+nma 65% số điểm cũng là 1 kèo khá thơm
+với cả chắc sẽ cắn được 1 ít của subtask 5
